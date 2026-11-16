@@ -146,3 +146,14 @@ Recognition performance can be affected by:
 - Quality and quantity of dataset images
 
 This project is intended as a facial-recognition demonstration.
+## Dataset Reload Endpoint
+
+**Endpoint:** POST /reload-dataset
+
+**Purpose:** Reloads the face dataset without restarting the API.
+
+**Response:**
+- Success message
+- Number of face samples
+- List of known people
+
