@@ -184,3 +184,22 @@ async def recognize(file: UploadFile = File(...)):
 
         if os.path.exists(temporary_file.name):
             os.remove(temporary_file.name)
+
+@app.post("/reload-dataset")
+def reload_dataset():
+    global known_encodings, known_names
+
+    try:
+        known_encodings, known_names = load_known_faces()
+
+        return {
+            "message": "Dataset reloaded successfully",
+            "known_face_samples": len(known_encodings),
+            "people": sorted(set(known_names))
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
